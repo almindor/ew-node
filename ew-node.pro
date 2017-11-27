@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network testlib network websockets
+QT       += network network websockets
 QT       -= gui
 
 INCLUDEPATH += src

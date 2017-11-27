@@ -75,11 +75,6 @@ namespace Etherwall {
         return res;
     }
 
-    const QString Helpers::toHexWeiStr(quint64 val) {
-        BigInt::Vin vinVal(val);
-        return QString(vinVal.toStr0xHex().data());
-    }
-
     const QString Helpers::decStrToHexStr(const QString &dec) {
         BigInt::Vin vinVal(dec.toStdString(), 10);
         return QString(vinVal.toStr0xHex().data());

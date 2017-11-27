@@ -21,7 +21,6 @@ namespace Etherwall {
         static const QString toDecStr(quint64 val);
         static const QString toHexStr(quint64 val);
         static const QString toHexWeiStr(const QString& val);
-        static const QString toHexWeiStr(quint64 val);
         static const QString decStrToHexStr(const QString& dec);
         static const QString weiStrToEtherStr(const QString& wei);
         static const QString baseStrToFullStr(const QString& base, quint8 decimals);

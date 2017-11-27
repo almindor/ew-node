@@ -7,8 +7,8 @@
 QT       += network testlib network websockets
 QT       -= gui
 
-INCLUDEPATH += ewnode
-DEPENDPATH += ewnode
+INCLUDEPATH += src
+DEPENDPATH += src
 
 TARGET = ew-node
 TEMPLATE = lib
@@ -26,27 +26,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        ewnode/node.cpp \
-        ewnode/nodeipc.cpp \
-        ewnode/nodews.cpp \
-        ewnode/types.cpp \
-        ewnode/etherlog.cpp \
-        ewnode/gethlog.cpp \
-        ewnode/helpers.cpp \
-        ewnode/ethereum/bigint.cpp \
-        ewnode/ethereum/tx.cpp
+        src/node.cpp \
+        src/nodeipc.cpp \
+        src/nodews.cpp \
+        src/types.cpp \
+        src/etherlog.cpp \
+        src/gethlog.cpp \
+        src/helpers.cpp \
+        src/ethereum/bigint.cpp \
+        src/ethereum/tx.cpp
 
 HEADERS += \
-        ewnode/node.h \
-        ewnode/nodeipc.h \
-        ewnode/nodews.h \
-        ewnode/types.h \
-        ewnode/etherlog.h \
-        ewnode/gethlog.h \
-        ewnode/helpers.h \
-        ewnode/ethereum/keccak.h \
-        ewnode/ethereum/bigint.h \
-        ewnode/ethereum/tx.h
+        src/node.h \
+        src/nodeipc.h \
+        src/nodews.h \
+        src/types.h \
+        src/etherlog.h \
+        src/gethlog.h \
+        src/helpers.h \
+        src/ethereum/keccak.h \
+        src/ethereum/bigint.h \
+        src/ethereum/tx.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

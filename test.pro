@@ -1,18 +1,20 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-11-26T18:59:51
+# Project created by QtCreator 2017-11-27T12:16:05
 #
 #-------------------------------------------------
 
-QT       += network network websockets
+QT       += testlib network websockets
 QT       -= gui
 
-INCLUDEPATH += src
 DEPENDPATH += src
+INCLUDEPATH += src
 
-TARGET = ew-node
-TEMPLATE = lib
-CONFIG += staticlib
+TARGET = tst_helperstest
+CONFIG   += console
+CONFIG   -= app_bundle
+
+TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -27,10 +29,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 include(ew-node.pri)
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
+SOURCES += \
+        test/tst_helperstest.cpp
 
-DISTFILES += \
-    ew-node.pri
+DEFINES += SRCDIR=\\\"$$PWD/\\\"

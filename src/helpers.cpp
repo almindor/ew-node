@@ -191,13 +191,22 @@ namespace Etherwall {
             if ( dest.at(i).isNull() && !source.at(i).isNull() ) { // override nulls with actual values
                 dest.replace(i, source.at(i));
             } else if ( !dest.at(i).isNull() && !source.at(i).isNull() ) { // append to existing
-                QJsonArray inner = dest.at(i).isArray() ? dest.at(i).toArray() : QJsonArray();
+                QJsonArray inner;
+                if ( dest.at(i).isArray() ) {
+                    inner = dest.at(i).toArray();
+                } else {
+                    inner.append(dest.at(i));
+                }
+
                 if ( source.at(i).isArray() ) {
-                    inner = inner + source.at(i).toArray();
+                    const QJsonArray sourceInner = source.at(i).toArray();
+                    foreach ( const QJsonValue& siv, sourceInner ) {
+                        inner.append(siv);
+                    }
                 } else {
                     inner.append(source.at(i));
                 }
-                inner.replace(i, inner);
+                dest.replace(i, inner);
             } // both null, leave as is, nulls don't merge
         }
     }

@@ -136,12 +136,11 @@ namespace Etherwall {
 
         // static & global
         static const QString defaultIPCPath(const QString& dataDir, bool testnet);
-        static const QString defaultGethPath();
 
         static const QString sDefaultDataDir;
         static const QString sDefaultGethArgs;
     public slots:
-        virtual void start(const QString& version, const QString& endpoint, const QString& warning);
+        virtual void start(const QString& progStr, const QString& version, const QString& endpoint, const QString& warning);
     protected slots:
         void waitConnect();
         void connectToServer();
@@ -213,6 +212,7 @@ namespace Etherwall {
         QMap<QString, QString> fEventFilterIDs;
         quint64 fBlockNumber;
         QString fReceivedMsg;
+        QString fProgStr;
 
         void handleNewAccount();
         void handleGetAccounts();

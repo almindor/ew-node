@@ -21,7 +21,7 @@ namespace Etherwall {
         Q_INVOKABLE virtual bool closeApp();
         Q_INVOKABLE virtual void setInterval(int interval);
     public slots:
-        virtual void start(const QString &version, const QString &endpoint, const QString &warning);
+        virtual void start(const QString& progStr, const QString &version, const QString &endpoint, const QString &warning);
     protected slots:
         // override
         virtual void finishInit();

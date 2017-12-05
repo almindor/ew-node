@@ -50,7 +50,7 @@ namespace Etherwall {
         fTimer.setInterval(10000);
     }
 
-    void NodeWS::start(const QString &version, const QString &endpoint, const QString &warning)
+    void NodeWS::start(const QString& progStr, const QString &version, const QString &endpoint, const QString &warning)
     {
         Q_UNUSED(version); // TODO
         Q_UNUSED(warning);
@@ -60,7 +60,7 @@ namespace Etherwall {
         fEndpoint = endpoint;
 
         connectWebsocket();
-        NodeIPC::start(version, endpoint, warning);
+        NodeIPC::start(progStr, version, endpoint, warning);
     }
 
     void NodeWS::finishInit()

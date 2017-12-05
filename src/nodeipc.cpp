@@ -121,7 +121,7 @@ namespace Etherwall {
         fGeth.kill();
     }
 
-    void NodeIPC::start(const QString &version, const QString &endpoint, const QString &warning)
+    void NodeIPC::start(const QString& progStr, const QString &version, const QString &endpoint, const QString &warning)
     {
         Q_UNUSED(version); // TODO
         Q_UNUSED(endpoint);
@@ -137,15 +137,14 @@ namespace Etherwall {
             return connectToServer();
         }
 
+        fProgStr = progStr;
         init();
     }
 
     void NodeIPC::init() {
-        QSettings settings;       
         QStringList args = buildGethArgs(); // has to run first
-        const QString progStr = settings.value("geth/path", defaultGethPath()).toString();
 
-        QFileInfo info(progStr);
+        QFileInfo info(fProgStr);
         if ( !info.exists() || !info.isExecutable() ) {
             fStarting = -1;
             emit startingChanged(-1);
@@ -153,11 +152,11 @@ namespace Etherwall {
             return bail();
         }
 
-        EtherLog::logMsg("Geth starting " + progStr + " " + args.join(" "), LS_Info);
+        EtherLog::logMsg("Geth starting " + fProgStr + " " + args.join(" "), LS_Info);
         fStarting = 2;
 
         fGethLog.attach(&fGeth);
-        fGeth.start(progStr, args);
+        fGeth.start(fProgStr, args);
         emit startingChanged(0);
     }
 
@@ -1118,18 +1117,6 @@ namespace Etherwall {
 #else
         const QString mid_fix = testnet ? "/rinkeby" : "";
         return QDir::cleanPath(dataDir + mid_fix + "/geth.ipc");
-#endif
-    }
-
-    const QString NodeIPC::defaultGethPath() {
-#ifdef Q_OS_WIN32
-        return QApplication::applicationDirPath() + "/geth.exe";
-#else
-#ifdef Q_OS_MACX
-        return QApplication::applicationDirPath() + "/geth";
-#else
-        return "/usr/bin/geth";
-#endif
 #endif
     }
 

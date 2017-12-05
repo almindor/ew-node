@@ -127,6 +127,7 @@ namespace Etherwall {
         Q_UNUSED(endpoint);
         Q_UNUSED(warning);
 
+        fProgStr = progStr;
         buildGethArgs(); // has to run first
 
         fConnectAttempts = 0;
@@ -137,7 +138,6 @@ namespace Etherwall {
             return connectToServer();
         }
 
-        fProgStr = progStr;
         init();
     }
 

@@ -524,13 +524,19 @@ namespace Etherwall {
         return qCompress(result, 9);
     }
 
-    void Helpers::restoreBackup(QByteArray& data, const QDir& keystore) {
+    void Helpers::restoreBackup(const QByteArray& data, const QDir& keystore) {
         QByteArray raw = qUncompress(data);
+        if ( raw.size() == 0 ) {
+            throw QString("Invalid backup data");
+        }
         QDataStream totalStream(&raw, QIODevice::ReadOnly);
 
         quint32 allSize;
         quint16 crc;
         totalStream >> allSize;
+        if ( allSize == 0 ) {
+            throw QString("Invalid backup data");
+        }
         totalStream >> crc;
         QByteArray all(allSize, '\0');
         totalStream >> all;

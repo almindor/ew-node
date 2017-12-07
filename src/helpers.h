@@ -42,7 +42,7 @@ namespace Etherwall {
         static const QByteArray exportAddresses(const QDir& keystore, int& exported);
         static void importAddresses(QByteArray& data, const QDir& keystore);
         static const QByteArray createBackup(const QDir& keystore, int& exported);
-        static void restoreBackup(QByteArray& data, const QDir& keystore);
+        static void restoreBackup(const QByteArray& data, const QDir& keystore);
         static const QByteArray keccak256(const QByteArray& source);
     };
 

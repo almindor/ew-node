@@ -32,6 +32,7 @@ private Q_SLOTS:
     void vitalizeAddressTest();
     void networkPostfixTest();
     void keccak256Test();
+    void restoreBackupTest();
 };
 
 HelpersTest::HelpersTest()
@@ -204,6 +205,25 @@ void HelpersTest::keccak256Test()
 {
     QCOMPARE(Helpers::keccak256("a"), QByteArray::fromHex("3ac225168df54212a25c1c01fd35bebfea408fdac2e31ddd6f80a4bbf9a5f1cb"));
     QCOMPARE(Helpers::keccak256("idiomatic unit test"), QByteArray::fromHex("11d7ca97713076b607b1c1c1d91a8d76dca5401cc60fa3f530777b87ea02e9a5"));
+}
+
+void HelpersTest::restoreBackupTest()
+{
+    try {
+        Helpers::restoreBackup(QByteArray(), QDir("/tmp"));
+        QFAIL("should fail on empty backup");
+    } catch ( QString err ) {
+        QCOMPARE(err, QString("Invalid backup data"));
+    }
+
+    try {
+        QByteArray raw;
+        raw.append(255, 8); // size, crc and 2bytes invalid data
+        Helpers::restoreBackup(qCompress(raw, 9), QDir("/tmp"));
+        QFAIL("should fail on bad CRC");
+    } catch ( QString err ) {
+        QCOMPARE(err, QString("CRC check mismatch: 2056 != 0"));
+    }
 }
 
 QTEST_APPLESS_MAIN(HelpersTest)

@@ -202,7 +202,7 @@ namespace Etherwall {
 
     const QString AccountInfo::getSummary() const
     {
-        return (fHDPath.isEmpty() ? "   " : "⊡ ") +  value(AliasRole).toString() + " [" + fBalance + "]";
+        return (fHDPath.isEmpty() ? "   " : "⊡ ") +  value(AliasRole).toString() + " [" + getBalance() + "]";
     }
 
     const QString AccountInfo::getBalance() const

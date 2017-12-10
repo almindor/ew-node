@@ -131,7 +131,7 @@ namespace Etherwall {
         const QVariant value(const int role) const;
         void setBalance(const QString& balance);
         void setTokenBalance(const QString& tokenAddress, const QString& balance);
-        void setCurrentToken(const QString& tokenAddress);
+        void setCurrentTokenAddress(const QString& tokenAddress);
         void setTransactionCount(quint64 count);
         const QString getCurrentTokenAddress() const;
         const QString getTokenBalance(const QString& tokenAddress) const;

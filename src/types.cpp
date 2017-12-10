@@ -131,7 +131,7 @@ namespace Etherwall {
         fTokenBalances[tokenAddress] = balance;
     }
 
-    void AccountInfo::setCurrentToken(const QString &tokenAddress)
+    void AccountInfo::setCurrentTokenAddress(const QString &tokenAddress)
     {
         fCurrentTokenAddress = tokenAddress;
     }

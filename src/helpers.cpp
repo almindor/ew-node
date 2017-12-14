@@ -322,7 +322,9 @@ namespace Etherwall {
                 word->append(c);
             } else { // delimiter reached
                 if ( word == &value ) {
-                    settings.setValue(QString(key), QString(value));
+                    if ( !QString::fromUtf8(key).startsWith("geth/") ) { // these are OS specific, keep whatever we have
+                        settings.setValue(QString(key), QString(value));
+                    }
                     word = &key;
                     value.clear();
                     key.clear();

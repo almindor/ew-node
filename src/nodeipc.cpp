@@ -1345,11 +1345,6 @@ namespace Etherwall {
 
         result = obj["result"];
 
-        // get filter changes bugged, returns null on result array, see https://github.com/ethereum/go-ethereum/issues/2746
-        if ( result.isNull() && (fActiveRequest.getType() == GetFilterChanges || fActiveRequest.getType() == GetAccountRefs) ) {
-            result = QJsonValue(QJsonArray());
-        }
-
         if ( result.isUndefined() || result.isNull() ) {
             if ( obj.contains("error") ) {
                 if ( obj["error"].toObject().contains("message") ) {

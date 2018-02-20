@@ -231,7 +231,7 @@ namespace Etherwall {
 
     typedef QList<TransactionInfo> TransactionList;
 
-    typedef bool(*IPCReplyErrorHandler)(int code, const QString& error, QJsonValue& result);
+    typedef bool(*IPCReplyErrorHandler)(int code, const QString& error, NodeRequestTypes requestType, QJsonValue& result);
 
     typedef QMap<int, IPCReplyErrorHandler> IPCReplyErrorHandlerList;
 }

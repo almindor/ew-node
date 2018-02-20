@@ -1362,7 +1362,7 @@ namespace Etherwall {
 
                 // if we have a special handler callback, use it. Useful for handling things like errors on eth_estimateGas
                 if ( fIPCReplyErrorHandlerList.contains(fCode) ) {
-                    return fIPCReplyErrorHandlerList[fCode](fCode, fError, result);
+                    return fIPCReplyErrorHandlerList[fCode](fCode, fError, fActiveRequest.getType(), result);
                 }
 
                 return false;

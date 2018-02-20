@@ -127,6 +127,7 @@ namespace Etherwall {
         void getTransactionByHash(const QString& hash);
         void newEventFilter(const QJsonArray& addresses, const QJsonArray& topics, const QString& internalID);
         void uninstallFilter(const QString& internalID);
+        void registerIpcErrorHandler(int code, IPCReplyErrorHandler* handler);
 
         Q_INVOKABLE virtual bool closeApp();
         Q_INVOKABLE virtual void setInterval(int interval);
@@ -213,6 +214,7 @@ namespace Etherwall {
         quint64 fBlockNumber;
         QString fReceivedMsg;
         QString fProgStr;
+        IPCReplyErrorHandlerList fIPCReplyErrorHandlerList;
 
         void handleNewAccount();
         void handleGetAccounts();

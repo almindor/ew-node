@@ -979,6 +979,11 @@ namespace Etherwall {
         }
     }
 
+    void NodeIPC::registerIpcErrorHandler(int code, IPCReplyErrorHandler *handler)
+    {
+        fIPCReplyErrorHandlerList[code] = handler;
+    }
+
     void NodeIPC::getLogs(const QStringList& addresses, const QJsonArray& topics, quint64 fromBlock, const QString& internalID) {
         QJsonArray params;
         QJsonObject o;
@@ -1353,6 +1358,11 @@ namespace Etherwall {
 
                 if ( obj["error"].toObject().contains("code") ) {
                     fCode = obj["error"].toObject()["code"].toInt();
+                }
+
+                // if we have a special handler callback, use it. Useful for handling things like errors on eth_estimateGas
+                if ( fIPCReplyErrorHandlerList.contains(fCode) ) {
+                    return fIPCReplyErrorHandlerList.at(fCode)(fCode, fError, result);
                 }
 
                 return false;

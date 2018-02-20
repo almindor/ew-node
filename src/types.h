@@ -230,6 +230,10 @@ namespace Etherwall {
     };
 
     typedef QList<TransactionInfo> TransactionList;
+
+    typedef bool(*IPCReplyErrorHandler)(int code, const QString& error, QJsonValue& result);
+
+    typedef QList<int, *IPCReplyErrorHandler> IPCReplyErrorHandlerList;
 }
 
 #endif // TYPES_H

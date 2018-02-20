@@ -979,7 +979,7 @@ namespace Etherwall {
         }
     }
 
-    void NodeIPC::registerIpcErrorHandler(int code, IPCReplyErrorHandler *handler)
+    void NodeIPC::registerIpcErrorHandler(int code, IPCReplyErrorHandler handler)
     {
         fIPCReplyErrorHandlerList[code] = handler;
     }
@@ -1362,7 +1362,7 @@ namespace Etherwall {
 
                 // if we have a special handler callback, use it. Useful for handling things like errors on eth_estimateGas
                 if ( fIPCReplyErrorHandlerList.contains(fCode) ) {
-                    return fIPCReplyErrorHandlerList.at(fCode)(fCode, fError, result);
+                    return fIPCReplyErrorHandlerList[fCode](fCode, fError, result);
                 }
 
                 return false;

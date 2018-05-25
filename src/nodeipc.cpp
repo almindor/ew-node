@@ -962,6 +962,9 @@ namespace Etherwall {
         }
 
         bool isEventFilter = fEventFilterIDs.contains(internalID);
+        if ( !internalID.startsWith("0x") && !isEventFilter ) { // not block filter but we don't have mapping, means no filter was installed
+            return; // nothing
+        }
         const QString filterID = isEventFilter ? fEventFilterIDs.value(internalID) : internalID; // block filter is direct
 
         QJsonArray params;

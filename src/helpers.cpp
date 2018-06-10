@@ -229,10 +229,10 @@ namespace Etherwall {
         return 0;
     }
 
-    QJsonObject Helpers::parseHTTPReply(QNetworkReply *reply) {
+    const QJsonDocument Helpers::parseHTTPReply(QNetworkReply *reply) {
         if ( reply == NULL ) {
             EtherLog::logMsg("Undefined reply", LS_Error);
-            return QJsonObject();
+            return QJsonDocument();
         }
 
         const QByteArray data = reply->readAll();
@@ -243,10 +243,10 @@ namespace Etherwall {
 
         if ( parseError.error != QJsonParseError::NoError ) {
             EtherLog::logMsg("HTTP Response parse error: " + parseError.errorString(), LS_Error);
-            return QJsonObject();
+            return QJsonDocument();
         }
 
-        return resDoc.object();
+        return resDoc;
     }
 
     const QString Helpers::vitalizeAddress(const QString& origAddress) {

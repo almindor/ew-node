@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QString>
-#include <QJsonObject>
+#include <QJsonDocument>
 #include <QNetworkReply>
 #include <QDir>
 #include "ethereum/bigint.h"
@@ -32,7 +32,7 @@ namespace Etherwall {
         static void mergeJsonArrays(QJsonArray& dest, const QJsonArray& source);
         static quint64 toQUInt64(const QJsonValue& jv);
         static int parseAppVersion(const QString& ver);
-        static QJsonObject parseHTTPReply(QNetworkReply *reply);
+        static const QJsonDocument parseHTTPReply(QNetworkReply *reply);
         static const QString vitalizeAddress(const QString& origAddress);
         static const QString networkPostfix(int network);
         static const QByteArray exportSettings();

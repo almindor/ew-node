@@ -285,12 +285,13 @@ namespace Etherwall {
         return "0x" + result;
     }
 
-    const QString Helpers::networkPostfix(int network)
+    const QString Helpers::networkPostfix(int network) // TODO: remove from accountinfo and other outside of networkchainmanager
     {
         switch ( network ) {
             case 1: return "/eth/homestead";
             case 3: return "/eth/ropsten";
             case 4: return "/eth/rinkeby";
+            case 42: return "/eth/kovan";
         }
 
         return "/unknown/unknown";

@@ -34,6 +34,7 @@
 #include <QTime>
 #include <QVariantMap>
 #include "types.h"
+#include "networkchainmanager.h"
 #include "etherlog.h"
 #include "gethlog.h"
 #include "ethereum/bigint.h"
@@ -100,6 +101,7 @@ namespace Etherwall {
         void init();
         virtual bool isThinClient() const;
 
+        const NetworkChainManager& chainManager() const;
         void setWorker(QThread* worker);
         bool getBusy() const;
         bool getExternal() const;
@@ -107,10 +109,7 @@ namespace Etherwall {
         bool getClosing() const;
         const QString& getError() const;
         int getCode() const;
-        bool getTestnet() const;
-        const QString getNetworkPostfix() const;
         quint64 blockNumber() const;
-        int network() const;
         quint64 nonceStart() const;
         void getAccounts();
         bool refreshAccount(const QString& hash, int index);
@@ -199,6 +198,7 @@ namespace Etherwall {
         NodeRequest fActiveRequest;
         QTimer fTimer;
         int fNetVersion;
+        NetworkChainManager fChainManager;
         QString fClientVersion;
         QProcess fGeth;
         int fStarting;
@@ -250,6 +250,7 @@ namespace Etherwall {
         bool killGeth();
         int parseVersionNum() const;
         void unlockAccount(const QString& hash, const QString& password, int duration, int index);
+        bool getTestnet() const;
         bool getBalance(const QString& hash, int index);
         bool getTransactionCount(const QString& hash, int index);
         void getSyncing();

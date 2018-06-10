@@ -126,7 +126,7 @@ namespace Etherwall {
     {
     public:
         AccountInfo(const QString& hash, const QString& alias, const QString& deviceID,
-                    const QString& balance, quint64 transCount, const QString& hdPath, const int network);
+                    const QString& balance, quint64 transCount, const QString& hdPath, int network);
 
         const QVariant value(const int role) const;
         void setBalance(const QString& balance);

@@ -258,14 +258,6 @@ namespace Etherwall {
         fTimer.setInterval(interval);
     }
 
-    bool NodeIPC::getTestnet() const {
-        return fNetVersion == 4;
-    }
-
-    const QString NodeIPC::getNetworkPostfix() const {
-        return Helpers::networkPostfix(fNetVersion);
-    }
-
     bool NodeIPC::killGeth() {
         if ( fGeth.state() == QProcess::NotRunning ) {
             return true;
@@ -471,11 +463,6 @@ namespace Etherwall {
 
     quint64 NodeIPC::blockNumber() const {
         return fBlockNumber;
-    }
-
-    int NodeIPC::network() const
-    {
-        return fNetVersion;
     }
 
     quint64 NodeIPC::nonceStart() const
@@ -914,6 +901,11 @@ namespace Etherwall {
         }
     }
 
+    bool NodeIPC::getTestnet() const
+    {
+        return fChainManager.testnet();
+    }
+
     void NodeIPC::getFilterChanges(const QString& filterID, const QString& internalFilterID) {
         if ( filterID < 0 ) {
             setError("Filter ID invalid");
@@ -1010,6 +1002,11 @@ namespace Etherwall {
     bool NodeIPC::isThinClient() const
     {
         return false;
+    }
+
+    const NetworkChainManager &NodeIPC::chainManager() const
+    {
+        return fChainManager;
     }
 
     void NodeIPC::handleUninstallFilter() {
@@ -1175,6 +1172,8 @@ namespace Etherwall {
             setError("Unable to parse net version string: " + jv.toString());
             return bail(true);
         }
+
+        fChainManager.init(fNetVersion);
 
         emit netVersionChanged(fNetVersion);
         emit ipcReady();

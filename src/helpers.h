@@ -31,7 +31,7 @@ namespace Etherwall {
         static const QJsonArray toQJsonArray(const AccountList& list);
         static void mergeJsonArrays(QJsonArray& dest, const QJsonArray& source);
         static quint64 toQUInt64(const QJsonValue& jv);
-        static int parseAppVersion(const QString& ver);
+        static int parseVersion(const QString& ver);
         static const QJsonDocument parseHTTPReply(QNetworkReply *reply);
         static const QString vitalizeAddress(const QString& origAddress);
         static const QString networkPostfix(int network);
@@ -54,7 +54,7 @@ namespace Etherwall {
         Q_INVOKABLE bool checkAddress(const QString& origAddress) const;
         Q_INVOKABLE const QString localURLToString(const QUrl& url) const;
         Q_INVOKABLE const QString exportAddress(const QString& address, bool testnet) const;
-        Q_INVOKABLE int parseAppVersion(const QString& ver) const;
+        Q_INVOKABLE int parseVersion(const QString& ver) const;
         Q_INVOKABLE const QString fullStrToBaseStr(const QString& full, quint8 decimals) const;
     };
 

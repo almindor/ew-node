@@ -217,8 +217,8 @@ namespace Etherwall {
         return vin.toUlong();
     }
 
-    int Helpers::parseAppVersion(const QString &ver) {
-        QRegExp reg("([0-9]+)\\.([0-9]+)\\.([0-9]+).*$");
+    int Helpers::parseVersion(const QString &ver) {
+        QRegExp reg("^v?([0-9]+)\\.([0-9]+)\\.([0-9]+).*$");
         reg.indexIn(ver);
         if ( reg.captureCount() == 3 ) try {
             return reg.cap(1).toInt() * 100000 + reg.cap(2).toInt() * 1000 + reg.cap(3).toInt();
@@ -617,8 +617,8 @@ namespace Etherwall {
         return Helpers::exportAddress(keystore, tmp);
     }
 
-    int QmlHelpers::parseAppVersion(const QString& ver) const {
-        return Helpers::parseAppVersion(ver);
+    int QmlHelpers::parseVersion(const QString& ver) const {
+        return Helpers::parseVersion(ver);
     }
 
     const QString QmlHelpers::fullStrToBaseStr(const QString &full, quint8 decimals) const

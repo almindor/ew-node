@@ -869,18 +869,6 @@ namespace Etherwall {
         }
     }
 
-    int NodeIPC::parseVersionNum() const {
-        QRegExp reg("^Geth/v([0-9]+)\\.([0-9]+)\\.([0-9]+).*$");
-        reg.indexIn(fClientVersion);
-        if ( reg.captureCount() == 3 ) try { // it's geth
-            return reg.cap(1).toInt() * 100000 + reg.cap(2).toInt() * 1000 + reg.cap(3).toInt();
-        } catch ( ... ) {
-            return 0;
-        }
-
-        return 0;
-    }
-
     void NodeIPC::getSyncing() {
         if ( !queueRequest(NodeRequest(NonVisual, GetSyncing, "eth_syncing")) ) {
             return bail();
@@ -1143,17 +1131,6 @@ namespace Etherwall {
         }
 
         fClientVersion = jv.toString();
-
-        const int vn = parseVersionNum();
-        if ( vn > 0 && vn < 104019 ) {
-            setError("Geth version 1.4.18 and older are not ready for the upcoming 4th hard fork. Please update Geth to ensure you are ready.");
-            emit error();
-        }
-
-        if ( vn > 0 && vn < 108000 ) {
-            setError("Geth version older than 1.8.0 is no longer supported due to vulnerabilities. Please upgrade geth to 1.8.0+.");
-            emit error();
-        }
 
         emit clientVersionChanged(fClientVersion);
         done();

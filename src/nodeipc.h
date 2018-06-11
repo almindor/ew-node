@@ -248,7 +248,6 @@ namespace Etherwall {
 
         void onTimer();
         bool killGeth();
-        int parseVersionNum() const;
         void unlockAccount(const QString& hash, const QString& password, int duration, int index);
         bool getTestnet() const;
         bool getBalance(const QString& hash, int index);

@@ -9,6 +9,8 @@
 #include "ethereum/bigint.h"
 #include "types.h"
 
+#define EW_NODE_VERSION 1000000
+
 namespace Etherwall {
 
     class Helpers

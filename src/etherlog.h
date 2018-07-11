@@ -19,7 +19,7 @@ namespace Etherwall {
         QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
         static void logMsg(const QString& msg, LogSeverity sev = LS_Info);
         const QString getContents() const;
-        Q_INVOKABLE void log(QString msg, LogSeverity sev = LS_Info);
+        Q_INVOKABLE void log(QString msg, int sev = LS_Info);
         int getLogLevel() const;
         void setLogLevel(int ll);
     signals:

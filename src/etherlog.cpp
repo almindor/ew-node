@@ -45,7 +45,7 @@ namespace Etherwall {
         sLog->log(msg, sev);
     }
 
-    void EtherLog::log(QString msg, LogSeverity sev) {
+    void EtherLog::log(QString msg, int sev) {
         if ( sev < fLogLevel ) {
             return; // skip due to severity setting
         }
@@ -59,7 +59,7 @@ namespace Etherwall {
         }
 
         beginInsertRows(QModelIndex(), 0, 0);
-        fList.insert(0, LogInfo(msg, sev));
+        fList.insert(0, LogInfo((LogSeverity) msg, sev));
         endInsertRows();
     }
 

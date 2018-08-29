@@ -2,7 +2,8 @@
 
 namespace Etherwall {
 
-    NetworkChainManager::NetworkChainManager(): fChainID(-1)
+    NetworkChainManager::NetworkChainManager() :
+        fChainID(-1), fChainName(), fNetworkPostfix(), fTestnet(false), fHDPathBase()
     {
     }
 

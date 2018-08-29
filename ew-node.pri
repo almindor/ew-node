@@ -6,6 +6,7 @@ SOURCES += \
         src/etherlog.cpp \
         src/gethlog.cpp \
         src/helpers.cpp \
+        src/networkchainmanager.cpp \
         src/ethereum/bigint.cpp \
         src/ethereum/tx.cpp
 
@@ -17,6 +18,7 @@ HEADERS += \
         src/etherlog.h \
         src/gethlog.h \
         src/helpers.h \
+        src/networkchainmanager.h \
         src/ethereum/keccak.h \
         src/ethereum/bigint.h \
         src/ethereum/tx.h

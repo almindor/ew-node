@@ -1042,7 +1042,7 @@ namespace Etherwall {
 
     void NodeIPC::getTransactionByHash(const QString& hash) {
         QJsonArray params;
-        params.append(hash);
+        params.append(Helpers::hexPrefix(hash));
 
         if ( !queueRequest(NodeRequest(NonVisual, GetTransactionByHash, "eth_getTransactionByHash", params)) ) {
             return bail();
@@ -1061,7 +1061,7 @@ namespace Etherwall {
 
     void NodeIPC::getBlockByHash(const QString& hash) {
         QJsonArray params;
-        params.append(hash);
+        params.append(Helpers::hexPrefix(hash));
         params.append(true); // get transaction bodies
 
         if ( !queueRequest(NodeRequest(NonVisual ,GetBlock, "eth_getBlockByHash", params)) ) {
@@ -1095,7 +1095,7 @@ namespace Etherwall {
 
     void NodeIPC::getTransactionReceipt(const QString& hash) {
         QJsonArray params;
-        params.append(hash);
+        params.append(Helpers::hexPrefix(hash));
 
         if ( !queueRequest(NodeRequest(NonVisual, GetTransactionReceipt, "eth_getTransactionReceipt", params)) ) {
             return bail();

@@ -208,7 +208,7 @@ namespace Etherwall {
         quint64 fHighestBlock;
         quint64 fStartingBlock;
         int fConnectAttempts;
-        QTime fKillTime;
+        QElapsedTimer fKillTime;
         bool fExternal;
         QMap<QString, QString> fEventFilterIDs;
         quint64 fBlockNumber;

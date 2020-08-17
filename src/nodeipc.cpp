@@ -103,7 +103,7 @@ namespace Etherwall {
         fConnectAttempts(0), fKillTime(), fExternal(false), fEventFilterIDs(),
         fReceivedMsg()
     {
-        connect(&fSocket, (void (QLocalSocket::*)(QLocalSocket::LocalSocketError))&QLocalSocket::error, this, &NodeIPC::onSocketError);
+        connect(&fSocket, &QLocalSocket::errorOccurred, this, &NodeIPC::onSocketError);
         connect(&fSocket, &QLocalSocket::readyRead, this, &NodeIPC::onSocketReadyRead);
         connect(&fSocket, &QLocalSocket::connected, this, &NodeIPC::connectedToServer);
         connect(&fSocket, &QLocalSocket::disconnected, this, &NodeIPC::disconnectedFromServer);
@@ -520,7 +520,6 @@ namespace Etherwall {
 
     void NodeIPC::signTransaction(const Ethereum::Tx &tx, const QString &password)
     {
-        qDebug() << "called sendTX with manual signing\n";
         unlockAccount(tx.fromStr(), password, 5, 0);
         signTransaction(tx);
     }
@@ -728,10 +727,10 @@ namespace Etherwall {
         bool testnet = settings.value("geth/testnet", false).toBool();
         fPath = defaultIPCPath(ddStr, testnet);
         if ( testnet ) { // geth 1.6.0+ only
-            args = (argStr + " --datadir " + ddStr + "/rinkeby").split(' ', QString::SkipEmptyParts);
+            args = (argStr + " --datadir " + ddStr + "/rinkeby").split(' ', Qt::SkipEmptyParts);
             args.append("--rinkeby");
         } else {
-            args = (argStr + " --datadir " + ddStr).split(' ', QString::SkipEmptyParts);
+            args = (argStr + " --datadir " + ddStr).split(' ', Qt::SkipEmptyParts);
         }
         args.append("--nousb");
 
@@ -823,7 +822,6 @@ namespace Etherwall {
             return bail();
         }
         fBlockFilterID = jv.toString();
-        // qDebug() << "new block filter: " << fBlockFilterID << "\n";
 
         if ( fBlockFilterID.isEmpty() ) {
             setError("Block filter ID invalid");
@@ -845,7 +843,6 @@ namespace Etherwall {
         }
         const QString internalID = fActiveRequest.getUserData().value("internalID").toString();
         fEventFilterIDs[internalID] = id;
-        // qDebug() << "new event filter: " << id << " internalID: " << internalID << "\n";
 
         done();
     }
@@ -1006,7 +1003,6 @@ namespace Etherwall {
         if ( fActiveRequest.getUserData().contains("internalID") ) {
             const QString internalID = fActiveRequest.getUserData().value("internalID").toString();
             fEventFilterIDs.remove(internalID);
-            // qDebug() << "removed event filter: " << internalID << "\n";
         }
 
         done();
@@ -1312,7 +1308,6 @@ namespace Etherwall {
         QJsonDocument resDoc = QJsonDocument::fromJson(fReceivedMsg.toUtf8(), &parseError);
 
         if ( parseError.error != QJsonParseError::NoError ) {
-            qDebug() << fReceivedMsg << "\n";
             setError("Response parse error: " + parseError.errorString());
             fCode = 0;
             return false;
@@ -1349,7 +1344,6 @@ namespace Etherwall {
 
             if ( fActiveRequest.getType() != GetTransactionByHash ) { // this can happen if out of sync, it's not fatal for transaction get
                 setError("Result object undefined in IPC response for request: " + fActiveRequest.getMethod());
-                qDebug() << fReceivedMsg << "\n";
                 return false;
             }
         }

@@ -263,7 +263,7 @@ namespace Etherwall {
             return true;
         }
 
-        if ( fKillTime.elapsed() == 0 ) {
+        if ( !fKillTime.isValid() ) {
             fKillTime.start();
 #ifdef Q_OS_WIN32
             SetConsoleCtrlHandler(NULL, true);

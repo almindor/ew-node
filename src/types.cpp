@@ -248,6 +248,10 @@ namespace Etherwall {
     {
     }
 
+    TransactionInfo TransactionInfo::operator =(const TransactionInfo& other) {
+        return TransactionInfo(other);
+    }
+
     const QVariant TransactionInfo::value(const int role) const {
         switch ( role ) {
             case THashRole: return QVariant(fHash);

@@ -191,6 +191,8 @@ namespace Etherwall {
         TransactionInfo(const QString& hash, quint64 blockNum); // for storing from server reply
         ~TransactionInfo();
 
+        TransactionInfo operator =(const TransactionInfo& other);
+
         const QVariant value(const int role) const;
         const QString getValue() const;
         quint64 getBlockNumber() const;

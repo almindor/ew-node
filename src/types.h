@@ -208,6 +208,7 @@ namespace Etherwall {
         quint64 getNonce() const;
         const QString getSenderAlias() const;
         const QString getReceiverAlias() const;
+        quint64 getTransactionIndex() const;
         void setSenderAlias(const QString& alias);
         void setReceiverAlias(const QString& alias);
         void init(const QString& from, const QString& to, const QString& value, const QString& gas = QString(),

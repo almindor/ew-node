@@ -233,6 +233,7 @@ namespace Etherwall {
         fSenderAlias = other.getSenderAlias();
         fReceiverAlias = other.getReceiverAlias();
         fBlockHash = other.getBlockHash();
+        fTransactionIndex = other.getTransactionIndex();
     }
 
     TransactionInfo::TransactionInfo(const QJsonObject& source) : fSenderAlias(), fReceiverAlias()
@@ -336,6 +337,10 @@ namespace Etherwall {
     const QString TransactionInfo::getReceiverAlias() const
     {
         return fReceiverAlias;
+    }
+
+    quint64 TransactionInfo::getTransactionIndex() const {
+        return fTransactionIndex;
     }
 
     void TransactionInfo::setSenderAlias(const QString &alias)

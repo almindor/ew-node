@@ -12,6 +12,7 @@ namespace Etherwall {
     {
         Q_OBJECT
         Q_PROPERTY(bool thinClient READ isThinClient NOTIFY thinClientChanged)
+        Q_PROPERTY(QString endpoint MEMBER fEndpoint NOTIFY endpointChanged)
     public:
         NodeWS(GethLog& gethLog);
         virtual ~NodeWS();
@@ -36,6 +37,7 @@ namespace Etherwall {
         void onTextMessageReceivedWS(const QString& msg);
     signals:
         void thinClientChanged();
+        void endpointChanged();
     private:
         QWebSocket fWebSocket;
         QString fEndpoint;

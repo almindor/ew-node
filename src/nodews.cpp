@@ -60,6 +60,7 @@ namespace Etherwall {
         fEndpoint = endpoint;
 
         connectWebsocket();
+        emit endpointChanged();
         NodeIPC::start(progStr, version, endpoint, warning);
     }
 

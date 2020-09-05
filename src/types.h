@@ -129,6 +129,7 @@ namespace Etherwall {
                     const QString& balance, quint64 transCount, const QString& hdPath, int network);
 
         const QVariant value(const int role) const;
+        const QString getBalanceFixed(quint8 digits) const;
         void setBalance(const QString& balance);
         void setTokenBalance(const QString& tokenAddress, const QString& balance);
         void setCurrentTokenAddress(const QString& tokenAddress);
@@ -195,6 +196,7 @@ namespace Etherwall {
 
         const QVariant value(const int role) const;
         const QString getValue() const;
+        const QString getValueFixed(quint8 digits) const;
         quint64 getBlockNumber() const;
         const QString getBlockHash() const;
         void setBlockNumber(quint64 num);

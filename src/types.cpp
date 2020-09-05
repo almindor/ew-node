@@ -122,6 +122,19 @@ namespace Etherwall {
         return QVariant();
     }
 
+    const QString AccountInfo::getBalanceFixed(quint8 digits) const
+    {
+        int dotPos = fBalance.indexOf('.');
+        if ( dotPos > 0 ) {
+            QString val = fBalance;
+            val.remove(dotPos + digits + 1, val.length());
+
+            return val;
+        } else {
+            return fBalance;
+        }
+    }
+
     void AccountInfo::setBalance(const QString& balance) {
         fBalance = balance;
     }
@@ -276,6 +289,19 @@ namespace Etherwall {
     const QString TransactionInfo::getValue() const
     {
         return fValue;
+    }
+
+    const QString TransactionInfo::getValueFixed(quint8 digits) const
+    {
+        int dotPos = fValue.indexOf('.');
+        if ( dotPos > 0 ) {
+            QString val = fValue;
+            val.remove(dotPos + digits + 1, val.length());
+
+            return val;
+        } else {
+            return fValue;
+        }
     }
 
     quint64 TransactionInfo::getBlockNumber() const {

@@ -58,6 +58,7 @@ namespace Etherwall {
         Q_INVOKABLE const QString exportAddress(const QString& address, bool testnet) const;
         Q_INVOKABLE int parseVersion(const QString& ver) const;
         Q_INVOKABLE const QString fullStrToBaseStr(const QString& full, quint8 decimals) const;
+        Q_INVOKABLE const QString xdgSessionType() const;
     };
 
 }

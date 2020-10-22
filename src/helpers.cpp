@@ -7,6 +7,7 @@
 #include <QSettings>
 #include <QFile>
 #include <QDataStream>
+#include <QProcessEnvironment>
 
 namespace Etherwall {
 
@@ -624,6 +625,13 @@ namespace Etherwall {
     const QString QmlHelpers::fullStrToBaseStr(const QString &full, quint8 decimals) const
     {
         return Helpers::fullStrToBaseStr(full, decimals);
+    }
+
+    const QString QmlHelpers::xdgSessionType() const
+    {
+        const QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+
+        return env.value("XDG_SESSION_TYPE", "unknown");
     }
 
 }

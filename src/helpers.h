@@ -9,7 +9,7 @@
 #include "ethereum/bigint.h"
 #include "types.h"
 
-#define EW_NODE_VERSION 1000005
+#define EW_NODE_VERSION 1000006
 
 namespace Etherwall {
 
@@ -34,7 +34,7 @@ namespace Etherwall {
         static void mergeJsonArrays(QJsonArray& dest, const QJsonArray& source);
         static quint64 toQUInt64(const QJsonValue& jv);
         static int parseVersion(const QString& ver);
-        static const QJsonDocument parseHTTPReply(QNetworkReply *reply);
+        static const QJsonDocument parseHTTPReply(QNetworkReply *reply, QString& error);
         static const QString vitalizeAddress(const QString& origAddress);
         static const QString networkPostfix(int network);
         static const QByteArray exportSettings();

@@ -230,9 +230,18 @@ namespace Etherwall {
         return 0;
     }
 
-    const QJsonDocument Helpers::parseHTTPReply(QNetworkReply *reply) {
+    const QJsonDocument Helpers::parseHTTPReply(QNetworkReply *reply, QString& error) {
+        error = QString();
+
         if ( reply == NULL ) {
+            error = "Undefined reply";
             EtherLog::logMsg("Undefined reply", LS_Error);
+            return QJsonDocument();
+        }
+
+        if ( reply->error() != QNetworkReply::NoError ) {
+            error = reply->errorString();
+            EtherLog::logMsg("HTTP Request error: " + error, LS_Error);
             return QJsonDocument();
         }
 
@@ -243,6 +252,7 @@ namespace Etherwall {
         const QJsonDocument resDoc = QJsonDocument::fromJson(data, &parseError);
 
         if ( parseError.error != QJsonParseError::NoError ) {
+            error = parseError.errorString();
             EtherLog::logMsg("HTTP Response parse error: " + parseError.errorString(), LS_Error);
             return QJsonDocument();
         }

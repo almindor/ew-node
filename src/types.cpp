@@ -124,14 +124,15 @@ namespace Etherwall {
 
     const QString AccountInfo::getBalanceFixed(quint8 digits) const
     {
-        int dotPos = fBalance.indexOf('.');
+        const QString balance = getBalance();
+        int dotPos = balance.indexOf('.');
         if ( dotPos > 0 ) {
-            QString val = fBalance;
+            QString val = balance;
             val.remove(dotPos + digits + 1, val.length());
 
             return val;
         } else {
-            return fBalance;
+            return balance;
         }
     }
 

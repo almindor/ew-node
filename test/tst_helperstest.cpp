@@ -183,7 +183,7 @@ void HelpersTest::toQUInt64Test()
 
 void HelpersTest::parseAppVersionTest()
 {
-    QCOMPARE(Helpers::parseAppVersion("1.2.3"), 102003);
+    QCOMPARE(Helpers::parseVersion("1.2.3"), 102003);
 }
 
 void HelpersTest::vitalizeAddressTest()

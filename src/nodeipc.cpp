@@ -94,7 +94,7 @@ namespace Etherwall {
     const QString NodeIPC::sDefaultDataDir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.ethereum";
     #endif
 #endif
-    const QString NodeIPC::sDefaultGethArgs = "--syncmode=fast --cache 512";
+    const QString NodeIPC::sDefaultGethArgs = "--syncmode=snap --cache 512";
 
     NodeIPC::NodeIPC(GethLog& gethLog) :
         fPath(), fBlockFilterID(), fClosingApp(false), fPeerCount(0), fActiveRequest(None),
@@ -716,9 +716,10 @@ namespace Etherwall {
         const QString ddStr = settings.value("geth/datadir", sDefaultDataDir).toString();
 
         // check deprecated options and replace them
-        if ( argStr.contains("--light") || argStr.contains("--fast") ) {
+        if ( argStr.contains("--syncmode=fast") || argStr.contains("--light") || argStr.contains("--fast") ) {
             argStr = argStr.replace("--light", "--syncmode=light");
-            argStr = argStr.replace("--fast", "--syncmode=fast");
+            argStr = argStr.replace("--fast", "--syncmode=snap");
+            argStr = argStr.replace("--syncmode=fast", "--syncmode=snap");
             settings.setValue("geth/args", argStr);
             qDebug() << "replaced args\n";
         }

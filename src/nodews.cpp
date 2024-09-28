@@ -175,7 +175,7 @@ namespace Etherwall {
             case SendTransaction: return false;
             case GetClientVersion: return false;
             case GetNetVersion: return false;
-            case GetSyncing: return false;
+            case GetSyncing: return true;
             case GetPeerCount: return false; // only "eth" available
             case GetLogs: return false; // we could use remote but this is a very heavy call, better not allow it
         }

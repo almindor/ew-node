@@ -9,7 +9,7 @@
 #include "ethereum/bigint.h"
 #include "types.h"
 
-#define EW_NODE_VERSION 1000008
+#define EW_NODE_VERSION 1000009
 
 namespace Etherwall {
 
